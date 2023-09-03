@@ -1,0 +1,20 @@
+{
+  "name": "funixproductions-api",
+  "version": "1.0.0",
+  "description": "A JavaScript libray to interact with the FunixProductions APIs (FunixGaming, FunixProductions, Pacifista)",
+  "main": "src/lib/index.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "prebuild": "npm run clean",
+    "build": "tsc --module commonjs"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "rimraf": "^5.0.1",
+    "typescript": "^5.2.2"
+  }
+}
