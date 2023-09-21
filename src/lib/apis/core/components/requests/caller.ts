@@ -1,42 +1,73 @@
-import {Axios, AxiosError} from 'axios';
+import axios, {AxiosError, AxiosInstance} from 'axios';
 import {Pagination} from '../../dtos/pagination';
 import {Paginated} from '../../dtos/paginated';
 import {ApiDTO} from '../../dtos/api-dto';
-import {HttpParamBuilder} from '../httpquery';
 
-export async function callApi<DTO extends ApiDTO>(method: HttpMethods, url: string, options: RequestOptions, apiKey?: string): Promise<Paginated<DTO>> {
-  const axios = new Axios();
+const axiosInstance: AxiosInstance = axios.create();
+
+export async function callApi<DTO extends ApiDTO>(
+  method: HttpMethods,
+  url: string,
+  options: RequestOptions = {},
+  apiKey?: string
+): Promise<Paginated<DTO>> {
   const headers = {
-    'Authorization': `Bearer ${apiKey ?? ''}`
+    'Authorization': `Bearer ${apiKey || ''}`
   };
 
-  return new Promise<Paginated<DTO>>((resolve, reject) => {
-    axios
-      .request<Paginated<DTO>>({
-        method,
-        url: url + (options.params ? '?' + options.params.queryArray.toString() : ''),
-        headers,
-        data: options.data
-      })
-      .then((response) => {
-        resolve(response.data);
-      })
-      .catch((error: AxiosError) => {
-        if (error.response) {
-          reject(new ApiError('API call failed', error.response.status, error.response.data));
-        } else if (error.request) {
-          reject(new ApiError('API call failed', undefined, 'No response received'));
-        } else {
-          reject(new ApiError('API call failed', undefined, 'Unknown error'));
-        }
-      });
-  });  
+  try {
+    const response = await axiosInstance.request<Paginated<DTO>>({
+      method,
+      url: buildUrl(url, options.params, options.options),
+      headers,
+      data: options.data
+    });
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const axiosError = error as AxiosError;
+      const statusCode = axiosError.response?.status;
+      const data = axiosError.response?.data;
+      const errorMessage = `API call failed: ${method} ${url} - Status ${statusCode}: ${data}`;
+      throw new ApiError(errorMessage, statusCode, data);
+    } else {
+      throw new ApiError('API call failed: Unknown error');
+    }
+  }
+}
+
+function buildUrl(baseURL: string, params?: URLSearchParams, options?: Pagination): string {
+  let url = baseURL + '?';
+
+  if (params) {
+    url += '&' + params.toString();
+  }
+
+  if (options) {
+    if (options.page) {
+      url += `&page=${options.page}`;
+    }
+
+    if (options.elemsPerPage) {
+      url += `&elemsPerPage=${options.elemsPerPage}`;
+    }
+    
+    if (options.search) {
+      url += `&search=${options.search}`;
+    }
+
+    if (options.sort) {
+      url += `&sort=${options.sort}`;
+    }
+  }
+
+  return url;
 }
 
 interface RequestOptions {
   options?: Pagination;
   data?: ApiDTO;
-  params?: HttpParamBuilder;
+  params?: URLSearchParams;
 }
 
 export enum HttpMethods {
@@ -49,7 +80,8 @@ export enum HttpMethods {
 
 class ApiError extends Error {
   statusCode?: number;
-  data?: string;
+  data?: any;
+  
   constructor(message: string, statusCode?: number, data?: any) {
     super(message);
     this.name = 'ApiError';
