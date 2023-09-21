@@ -11,10 +11,3 @@ export class Pagination {
         if (sort) this.sort = sort;
     }
 }
-
-export interface Pagination {
-    page: number;
-    elemsPerPage: number;
-    search: string;
-    sort: string;
-}
