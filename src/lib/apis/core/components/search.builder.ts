@@ -1,10 +1,17 @@
-export class HttpParam  {
+export class SearchParam  {
   key: string = '';
+  type: string = ':eq:';
   value?: string | string[];
 }
-export class HttpParamBuilder {
+export class SearchBuilder {
 
-  queryArray: HttpParam[] = [];
+  static like: string = ':like:'
+  static equal: string = ':eq:'
+  static notEqual: string = ':neq:'
+  static greater: string = ':gt:'
+  static lower: string = ':lt:'
+
+  queryArray: SearchParam[] = [];
 
   get(): string {
     if (this.queryArray.length <= 0) {
@@ -14,18 +21,18 @@ export class HttpParamBuilder {
     this.queryArray.forEach(it => {
       if (Array.isArray(it.value)) {
         if (it.value.length === 1) {
-          queryList.push(it.key + it.value[0])
+          queryList.push(it.key + it.type + it.value[0])
         } else {
-          queryList.push(it.key + '[' + it.value.join('|') + ']')
+          queryList.push(it.key + it.type + '[' + it.value.join('|') + ']')
         }
       } else {
-        queryList.push(it.key + it.value)
+        queryList.push(it.key + it.type + it.value)
       }
     });
     return queryList.join(',');
   }
 
-  addParam(param: HttpParam): HttpParamBuilder {
+  addParam(param: SearchParam) : SearchBuilder {
     if (param.key.length > 0) {
       if (!param.value || param.value.length <= 0) {
 
@@ -45,7 +52,7 @@ export class HttpParamBuilder {
     this.queryArray = [];
   }
 
-  private addParamOnlyIfAbsent(param: HttpParam): void {
+  private addParamOnlyIfAbsent(param: SearchParam): void {
     const indexToUpdate = this.queryArray.findIndex(q => q.key === param.key);
 
     if (indexToUpdate >= 0) {

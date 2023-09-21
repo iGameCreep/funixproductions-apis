@@ -1,8 +1,7 @@
 import {CrudHttpClient} from "../requests/crud-http-client";
 import {PageOption, Paginated} from "../../dtos/paginated";
-import {QueryBuilder, QueryParam} from "../query.builder";
+import {SearchBuilder, SearchParam} from "../search.builder";
 import {ApiDTO} from "../../dtos/api-dto";
-import { HttpParamBuilder } from "../httpquery";
 
 export abstract class ListComponent<DTO extends ApiDTO, SERVICE extends CrudHttpClient<DTO>> {
 
@@ -10,7 +9,7 @@ export abstract class ListComponent<DTO extends ApiDTO, SERVICE extends CrudHttp
   page: number = 0;
   elemsPerPage: number = 15;
 
-  protected queryBuilder: QueryBuilder = new QueryBuilder();
+  protected queryBuilder: SearchBuilder = new SearchBuilder();
   protected pageOption: PageOption = new PageOption();
 
   protected constructor(protected service: SERVICE, defaultSort: string = 'createdAt:desc') {
@@ -25,8 +24,8 @@ export abstract class ListComponent<DTO extends ApiDTO, SERVICE extends CrudHttp
     this.updateList();
   }
 
-  onSearchChange(champ: string, data: string | string[], queryType: string = QueryBuilder.like): void {
-    const queryParam: QueryParam = new QueryParam();
+  onSearchChange(champ: string, data: string | string[], queryType: string = SearchBuilder.like): void {
+    const queryParam: SearchParam = new SearchParam();
     queryParam.key = champ;
     queryParam.type = queryType;
     queryParam.value = data;
@@ -44,8 +43,8 @@ export abstract class ListComponent<DTO extends ApiDTO, SERVICE extends CrudHttp
 
   updateList(): void {
     const options = this.pageOption;
-    options.search = this.queryBuilder;
-    this.service.find(this.pageOption, new HttpParamBuilder()).then((data: Paginated<DTO>) => {
+    options.search = this.queryBuilder.get();
+    this.service.find(this.pageOption, new URLSearchParams()).then((data: Paginated<DTO>) => {
       this.entities = data;
     });
   }
