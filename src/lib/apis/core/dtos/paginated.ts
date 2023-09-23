@@ -1,7 +1,7 @@
 import {ApiDTO} from "./api-dto";
 
-export class Paginated<T extends ApiDTO> {
-  content: T[] = [];
+export class Paginated<DTO extends ApiDTO> {
+  content: DTO[] = [];
   actualPage: number = 0;
   totalPages: number = 1;
   totalElementsThisPage: number = 0;
