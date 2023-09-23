@@ -44,7 +44,7 @@ export abstract class ListComponent<DTO extends ApiDTO, SERVICE extends CrudHttp
   updateList(): void {
     const options = this.pageOption;
     options.search = this.queryBuilder.get();
-    this.service.find(this.pageOption, new URLSearchParams()).then((data: Paginated<DTO>) => {
+    this.service.find(this.pageOption).then((data: Paginated<DTO>) => {
       this.entities = data;
     });
   }

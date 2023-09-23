@@ -10,8 +10,7 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> {
 
   protected constructor(
     protected readonly domain: ApiBaseUrl,
-    protected readonly path: string,
-    protected readonly apiKey?: string
+    protected readonly path: string
   ) {
     this.url = domain + path;
   }
@@ -20,7 +19,7 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> {
    * Find and search
    * @param options set the data returned amount
    */
-  find(options: PageOption, searchParams: URLSearchParams): Promise<Paginated<DTO>> {
+  find(options: PageOption): Promise<Paginated<DTO>> {
     const params: Pagination = {
       page: options.page,
       elemsPerPage: options.elemsPerPage || 10,
@@ -28,10 +27,10 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> {
       search: options.search
     };
 
-    return callApi<DTO>(HttpMethods.GET, this.url, {options: params, params: searchParams});
+    return callApi<DTO>(HttpMethods.GET, this.url, {options: params});
   }
 
-  getById(id: string, options: PageOption, searchParams: URLSearchParams): Promise<Paginated<DTO>> {
+  getById(id: string, options: PageOption): Promise<Paginated<DTO>> {
     const params: Pagination = {
       page: options.page,
       elemsPerPage: options.elemsPerPage || 10,
@@ -39,24 +38,24 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> {
       search: options.search
     };
 
-    return callApi<DTO>(HttpMethods.GET, this.url + '/' + id, {options: params, params: searchParams});
+    return callApi<DTO>(HttpMethods.GET, this.url + '/' + id, {options: params});
   }
 
   create(dto: DTO): Promise<Paginated<DTO>> {
-    return callApi<DTO>(HttpMethods.POST, this.url, {data: dto}, this.apiKey);
+    return callApi<DTO>(HttpMethods.POST, this.url, {data: dto});
   }
 
   patch(dto: DTO): Promise<Paginated<DTO>> {
-    return callApi<DTO>(HttpMethods.PATCH, this.url, {data: dto}, this.apiKey);
+    return callApi<DTO>(HttpMethods.PATCH, this.url, {data: dto});
   }
 
   update(dto: DTO): Promise<Paginated<DTO>> {
-    return callApi<DTO>(HttpMethods.PUT, this.url, {data: dto}, this.apiKey);
+    return callApi<DTO>(HttpMethods.PUT, this.url, {data: dto});
   }
 
   delete(id: string): Promise<any> {
     const httpParams = new URLSearchParams();
     httpParams.append('id', id);
-    return callApi(HttpMethods.DELETE, this.url, {params: httpParams}, this.apiKey);
+    return callApi(HttpMethods.DELETE, this.url, {params: httpParams});
   }
 }

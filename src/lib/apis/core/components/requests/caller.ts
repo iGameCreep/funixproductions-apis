@@ -5,14 +5,19 @@ import {ApiDTO} from '../../dtos/api-dto';
 
 const axiosInstance: AxiosInstance = axios.create();
 
+var apiKey: string = '';
+
+export function setApikey(apikey: string) {
+  apiKey = apikey;
+}
+
 export async function callApi<DTO extends ApiDTO>(
   method: HttpMethods,
   url: string,
-  options: RequestOptions = {},
-  apiKey?: string
+  options: RequestOptions = {}
 ): Promise<Paginated<DTO>> {
   const headers = {
-    'Authorization': `Bearer ${apiKey || ''}`
+    'Authorization': `Bearer ${apiKey}`
   };
 
   try {
