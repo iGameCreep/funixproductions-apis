@@ -1,16 +1,17 @@
+export enum SearchTypes {
+  LIKE = ':like:',
+  EQUAL = ':eq:',
+  NOT_EQUAL = ':neq:',
+  GREATER = ':gt:',
+  LOWER = ':lt:'
+}
+
 export class SearchParam  {
   key: string = '';
-  type: string = ':eq:';
+  type: SearchTypes = SearchTypes.EQUAL;
   value?: string | string[];
 }
 export class SearchBuilder {
-
-  static like: string = ':like:'
-  static equal: string = ':eq:'
-  static notEqual: string = ':neq:'
-  static greater: string = ':gt:'
-  static lower: string = ':lt:'
-
   queryArray: SearchParam[] = [];
 
   get(): string {

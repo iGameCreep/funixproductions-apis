@@ -1,6 +1,6 @@
 import {CrudHttpClient} from "../requests/crud-http-client";
 import {PageOption, Paginated} from "../../dtos/paginated";
-import {SearchBuilder, SearchParam} from "../search.builder";
+import {SearchBuilder, SearchParam, SearchTypes} from "../search.builder";
 import {ApiDTO} from "../../dtos/api-dto";
 
 export abstract class ListComponent<DTO extends ApiDTO, SERVICE extends CrudHttpClient<DTO>> {
@@ -24,7 +24,7 @@ export abstract class ListComponent<DTO extends ApiDTO, SERVICE extends CrudHttp
     this.updateList();
   }
 
-  onSearchChange(champ: string, data: string | string[], queryType: string = SearchBuilder.like): void {
+  onSearchChange(champ: string, data: string | string[], queryType: SearchTypes = SearchTypes.LIKE): void {
     const queryParam: SearchParam = new SearchParam();
     queryParam.key = champ;
     queryParam.type = queryType;
