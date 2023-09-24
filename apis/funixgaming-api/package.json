@@ -2,7 +2,7 @@
   "name": "funixgaming-api",
   "version": "1.0.0",
   "description": "A JavaScript library to interact with the FunixGaming API",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "scripts": {
     "clean": "rimraf dist",
     "prebuild": "npm run clean",
