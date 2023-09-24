@@ -1,4 +1,4 @@
-import {ApiDTO} from "../../../core/dtos/api-dto";
+import {ApiDTO} from "funixproductions-apis-core";
 
 export class FunixbotUserExpDto extends ApiDTO {
   twitchUserId: string = '';
