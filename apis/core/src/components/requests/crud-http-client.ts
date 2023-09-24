@@ -1,7 +1,6 @@
 import {PageOption, Paginated} from "../../dtos/paginated";
 import {ApiDTO} from "../../dtos/api-dto";
 import {callApi, HttpMethods} from './caller';
-import {Pagination} from "../../dtos/pagination";
 
 /**
  * Represents an abstract base class for making CRUD (Create, Read, Update, Delete) HTTP requests.
@@ -33,7 +32,7 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> {
    * @returns {Promise<Paginated<DTO>>} - A promise that resolves with paginated data of type DTO.
    */
   find(options: PageOption): Promise<Paginated<DTO>> {
-    const params: Pagination = {
+    const params: PageOption = {
       page: options.page,
       elemsPerPage: options.elemsPerPage || 10,
       sort: options.sort!,
@@ -50,7 +49,7 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> {
    * @returns {Promise<Paginated<DTO>>} - A promise that resolves with paginated data of type DTO.
    */
   getById(id: string, options: PageOption): Promise<Paginated<DTO>> {
-    const params: Pagination = {
+    const params: PageOption = {
       page: options.page,
       elemsPerPage: options.elemsPerPage || 10,
       sort: options.sort!,

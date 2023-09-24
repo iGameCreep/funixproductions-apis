@@ -1,6 +1,5 @@
 import axios, {AxiosError, AxiosInstance} from 'axios';
-import {Pagination} from '../../dtos/pagination';
-import {Paginated} from '../../dtos/paginated';
+import {Paginated, PageOption} from '../../dtos/paginated';
 import {ApiDTO} from '../../dtos/api-dto';
 
 const axiosInstance: AxiosInstance = axios.create();
@@ -41,7 +40,7 @@ export async function callApi<DTO extends ApiDTO>(
   }
 }
 
-function buildUrl(baseURL: string, params?: URLSearchParams, options?: Pagination): string {
+function buildUrl(baseURL: string, params?: URLSearchParams, options?: PageOption): string {
   let url = baseURL + '?';
 
   if (params) {
@@ -70,7 +69,7 @@ function buildUrl(baseURL: string, params?: URLSearchParams, options?: Paginatio
 }
 
 interface RequestOptions {
-  options?: Pagination;
+  options?: PageOption;
   data?: ApiDTO;
   params?: URLSearchParams;
 }
