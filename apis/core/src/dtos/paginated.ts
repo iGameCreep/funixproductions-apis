@@ -1,4 +1,4 @@
-import {ApiDTO} from "./api-dto";
+import { ApiDTO } from "./api-dto";
 
 export class Paginated<DTO extends ApiDTO> {
   content: DTO[] = [];
@@ -22,7 +22,7 @@ export class PageOption {
   constructor(
     public elemsPerPage: number = 15,
     public page: number = 0,
-    public sort: string = '',
-    public search: string = ''
+    public sort: string = "",
+    public search: string = ""
   ) {}
 }

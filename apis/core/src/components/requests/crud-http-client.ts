@@ -1,6 +1,6 @@
-import {PageOption, Paginated} from "../../dtos/paginated";
-import {ApiDTO} from "../../dtos/api-dto";
-import {callApi, HttpMethods} from './caller';
+import { PageOption, Paginated } from "../../dtos/paginated";
+import { ApiDTO } from "../../dtos/api-dto";
+import { callApi, HttpMethods } from "./caller";
 
 /**
  * Represents an abstract base class for making CRUD (Create, Read, Update, Delete) HTTP requests.
@@ -36,7 +36,7 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> {
       page: options.page,
       elemsPerPage: options.elemsPerPage || 10,
       sort: options.sort!,
-      search: options.search
+      search: options.search,
     };
 
     return callApi<DTO>(HttpMethods.GET, this.url, { options: params });
@@ -53,10 +53,12 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> {
       page: options.page,
       elemsPerPage: options.elemsPerPage || 10,
       sort: options.sort!,
-      search: options.search
+      search: options.search,
     };
 
-    return callApi<DTO>(HttpMethods.GET, this.url + '/' + id, { options: params });
+    return callApi<DTO>(HttpMethods.GET, this.url + "/" + id, {
+      options: params,
+    });
   }
 
   /**
@@ -93,7 +95,7 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> {
    */
   delete(id: string): Promise<any> {
     const httpParams = new URLSearchParams();
-    httpParams.append('id', id);
+    httpParams.append("id", id);
     return callApi(HttpMethods.DELETE, this.url, { params: httpParams });
   }
 }

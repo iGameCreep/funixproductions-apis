@@ -1,10 +1,12 @@
-import {CrudHttpClient} from "../requests/crud-http-client";
-import {PageOption, Paginated} from "../../dtos/paginated";
-import {SearchBuilder, SearchParam, SearchTypes} from "../search.builder";
-import {ApiDTO} from "../../dtos/api-dto";
+import { CrudHttpClient } from "../requests/crud-http-client";
+import { PageOption, Paginated } from "../../dtos/paginated";
+import { SearchBuilder, SearchParam, SearchTypes } from "../search.builder";
+import { ApiDTO } from "../../dtos/api-dto";
 
-export abstract class ListComponent<DTO extends ApiDTO, SERVICE extends CrudHttpClient<DTO>> {
-
+export abstract class ListComponent<
+  DTO extends ApiDTO,
+  SERVICE extends CrudHttpClient<DTO>
+> {
   entities: Paginated<DTO> = new Paginated<DTO>();
   page: number = 0;
   elemsPerPage: number = 15;
@@ -12,7 +14,10 @@ export abstract class ListComponent<DTO extends ApiDTO, SERVICE extends CrudHttp
   protected queryBuilder: SearchBuilder = new SearchBuilder();
   protected pageOption: PageOption = new PageOption();
 
-  protected constructor(protected service: SERVICE, defaultSort: string = 'createdAt:desc') {
+  protected constructor(
+    protected service: SERVICE,
+    defaultSort: string = "createdAt:desc"
+  ) {
     this.pageOption.sort = defaultSort;
     this.pageOption.page = this.page;
     this.pageOption.elemsPerPage = this.elemsPerPage;
@@ -24,7 +29,11 @@ export abstract class ListComponent<DTO extends ApiDTO, SERVICE extends CrudHttp
     this.updateList();
   }
 
-  onSearchChange(champ: string, data: string | string[], queryType: SearchTypes = SearchTypes.LIKE): void {
+  onSearchChange(
+    champ: string,
+    data: string | string[],
+    queryType: SearchTypes = SearchTypes.LIKE
+  ): void {
     const queryParam: SearchParam = new SearchParam();
     queryParam.key = champ;
     queryParam.type = queryType;
@@ -48,5 +57,4 @@ export abstract class ListComponent<DTO extends ApiDTO, SERVICE extends CrudHttp
       this.entities = data;
     });
   }
-
 }

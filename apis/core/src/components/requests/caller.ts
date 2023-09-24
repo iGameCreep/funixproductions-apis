@@ -1,10 +1,10 @@
-import axios, {AxiosError, AxiosInstance} from 'axios';
-import {Paginated, PageOption} from '../../dtos/paginated';
-import {ApiDTO} from '../../dtos/api-dto';
+import axios, { AxiosError, AxiosInstance } from "axios";
+import { Paginated, PageOption } from "../../dtos/paginated";
+import { ApiDTO } from "../../dtos/api-dto";
 
 const axiosInstance: AxiosInstance = axios.create();
 
-var apiKey: string = '';
+var apiKey: string = "";
 
 export function setApikey(apikey: string) {
   apiKey = apikey;
@@ -16,7 +16,7 @@ export async function callApi<DTO extends ApiDTO>(
   options: RequestOptions = {}
 ): Promise<Paginated<DTO>> {
   const headers = {
-    'Authorization': `Bearer ${apiKey}`
+    Authorization: `Bearer ${apiKey}`,
   };
 
   try {
@@ -24,7 +24,7 @@ export async function callApi<DTO extends ApiDTO>(
       method,
       url: buildUrl(url, options.params, options.options),
       headers,
-      data: options.data
+      data: options.data,
     });
     return response.data;
   } catch (error) {
@@ -35,16 +35,20 @@ export async function callApi<DTO extends ApiDTO>(
       const errorMessage = `API call failed: ${method} ${url} - Status ${statusCode}: ${data}`;
       throw new ApiError(errorMessage, statusCode, data);
     } else {
-      throw new ApiError('API call failed: Unknown error');
+      throw new ApiError("API call failed: Unknown error");
     }
   }
 }
 
-function buildUrl(baseURL: string, params?: URLSearchParams, options?: PageOption): string {
-  let url = baseURL + '?';
+function buildUrl(
+  baseURL: string,
+  params?: URLSearchParams,
+  options?: PageOption
+): string {
+  let url = baseURL + "?";
 
   if (params) {
-    url += '&' + params.toString();
+    url += "&" + params.toString();
   }
 
   if (options) {
@@ -55,7 +59,7 @@ function buildUrl(baseURL: string, params?: URLSearchParams, options?: PageOptio
     if (options.elemsPerPage) {
       url += `&elemsPerPage=${options.elemsPerPage}`;
     }
-    
+
     if (options.search) {
       url += `&search=${options.search}`;
     }
@@ -75,20 +79,20 @@ interface RequestOptions {
 }
 
 export enum HttpMethods {
-  DELETE = 'DELETE',
-  GET = 'GET',
-  PATCH = 'PATCH',
-  POST = 'POST',
-  PUT = 'PUT'
+  DELETE = "DELETE",
+  GET = "GET",
+  PATCH = "PATCH",
+  POST = "POST",
+  PUT = "PUT",
 }
 
 class ApiError extends Error {
   statusCode?: number;
   data?: any;
-  
+
   constructor(message: string, statusCode?: number, data?: any) {
     super(message);
-    this.name = 'ApiError';
+    this.name = "ApiError";
     this.statusCode = statusCode;
     this.data = data;
   }
