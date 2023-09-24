@@ -1,7 +1,7 @@
 {
   "name": "funixproductions-api",
   "version": "1.0.0",
-  "description": "A JavaScript libray to interact with the FunixProductions APIs (FunixGaming, FunixProductions, Pacifista)",
+  "description": "JavaScript libraies to interact with the FunixProductions APIs (FunixGaming, FunixProductions, Pacifista)",
   "main": "src/lib/index.ts",
   "files": [
     "dist"
