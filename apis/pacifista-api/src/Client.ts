@@ -20,6 +20,9 @@ import { PlayerInventoryDataCrudClient } from "./server/players/sync/clients/Pla
 import { PlayerMoneyDataCrudClient } from "./server/players/sync/clients/PlayerMoneyDataCrudClient";
 import { SanctionCrudClient } from "./server/sanctions/clients/SanctionCrudClient";
 import { WarpCrudClient } from "./server/warps/client/WarpCrudClient";
+import { PacifistaNewsCrudClient } from "./web/news/clients/PacifistaNewsCrudClient";
+import { ShopArticlesCrudClient } from "./web/shop/articles/clients/ShopArticlesCrudClient";
+import { ShopCategoriesCrudClient } from "./web/shop/categories/clients/ShopCategoriesCrudClient";
 
 /**
  * Represents an API Client
@@ -82,7 +85,16 @@ export class Client {
   };
 
   public web = {
-    news: {},
-    shop: {},
+    news: {
+      pacifista_news: new PacifistaNewsCrudClient(),
+    },
+    shop: {
+      articles: {
+        shop_articles: new ShopArticlesCrudClient(),
+      },
+      categories: {
+        shop_categories: new ShopCategoriesCrudClient(),
+      },
+    },
   };
 }
