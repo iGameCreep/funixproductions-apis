@@ -1,8 +1,8 @@
-import {ApiDTO} from "funixproductions-apis-core";
+import { ApiDTO } from "funixproductions-apis-core";
 
 export class FunixbotUserExpDto extends ApiDTO {
-  twitchUserId: string = '';
-  twitchUsername: string = '';
+  twitchUserId: string = "";
+  twitchUsername: string = "";
   xp: number = 0;
   xpNextLevel: number = 0;
   level: number = 0;
