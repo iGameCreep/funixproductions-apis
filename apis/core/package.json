@@ -1,0 +1,29 @@
+{
+  "name": "funixproductions-apis-core",
+  "version": "1.0.4",
+  "description": "The core package to interact with the Funixproductions APIs",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "prebuild": "npm run clean",
+    "build": "tsc --module commonjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iGameCreep/funixproductions-apis.git",
+    "directory": "apis/core"
+  },
+  "author": "https://github.com/iGameCreep",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iGameCreep/funixproductions-apis/issues"
+  },
+  "homepage": "https://github.com/iGameCreep/funixproductions-apis#readme",
+  "devDependencies": {
+    "rimraf": "^5.0.1",
+    "typescript": "^5.2.2"
+  }
+}

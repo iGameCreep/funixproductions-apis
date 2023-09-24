@@ -1,7 +1,6 @@
 import {PageOption, Paginated} from "../../dtos/paginated";
 import {ApiDTO} from "../../dtos/api-dto";
 import {callApi, HttpMethods} from './caller';
-import {ApiBaseUrl} from "../../../apis";
 import {Pagination} from "../../dtos/pagination";
 
 /**
@@ -18,11 +17,11 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> {
 
   /**
    * Creates a new instance of the CrudHttpClient class.
-   * @param {ApiBaseUrl} domain - The base URL for the API domain.
+   * @param {string} domain - The base URL for the API domain.
    * @param {string} path - The path for the API endpoint.
    */
   protected constructor(
-    protected readonly domain: ApiBaseUrl,
+    protected readonly domain: string,
     protected readonly path: string
   ) {
     this.url = domain + path;
