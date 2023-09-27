@@ -1,6 +1,6 @@
-import { FunixbotAutomessagesCrudService } from "./funixbot/services/funixbot-automessages-crud-service";
-import { FunixbotCommandsCrudService } from "./funixbot/services/funixbot-commands-crud-service";
-import { FunixbotUserExpCrudService } from "./funixbot/services/funixbot-user-exp-crud-service";
+import { AutomessagesCrudClient } from "./funixbot/services/AutomessagesCrudClient";
+import { CommandsCrudClient } from "./funixbot/services/CommandsCrudClient";
+import { UserExpCrudClient } from "./funixbot/services/UserExpCrudClient";
 import { setApikey } from "funixproductions-apis-core";
 
 /**
@@ -19,8 +19,8 @@ export class Client {
    * The FunixGaming API methods.
    */
   public funixbot = {
-    funixbot_automessages: new FunixbotAutomessagesCrudService(),
-    funixbot_commands: new FunixbotCommandsCrudService(),
-    funixbot_user_exp: new FunixbotUserExpCrudService(),
+    funixbot_automessages: new AutomessagesCrudClient(),
+    funixbot_commands: new CommandsCrudClient(),
+    funixbot_user_exp: new UserExpCrudClient(),
   };
 }
