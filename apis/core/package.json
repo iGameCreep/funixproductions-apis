@@ -1,6 +1,6 @@
 {
   "name": "funixproductions-apis-core",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "The core package to interact with the Funixproductions APIs",
   "main": "dist/index.js",
   "files": [
