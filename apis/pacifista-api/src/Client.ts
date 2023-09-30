@@ -23,6 +23,8 @@ import { WarpCrudClient } from "./server/warps/client/WarpCrudClient";
 import { PacifistaNewsCrudClient } from "./web/news/clients/PacifistaNewsCrudClient";
 import { ShopArticlesCrudClient } from "./web/shop/articles/clients/ShopArticlesCrudClient";
 import { ShopCategoriesCrudClient } from "./web/shop/categories/clients/ShopCategoriesCrudClient";
+import { PacifistaSupportTicketCrudClient } from "./support/tickets/clients/PacifistaSupportTicketCrudClient";
+import { PacifistaSupportTicketMessageCrudClient } from "./support/tickets/clients/PacifistaSupportTicketMessageCrudClient";
 
 /**
  * Represents an API Client
@@ -81,7 +83,11 @@ export class Client {
   };
 
   public support = {
-    tickets: {},
+    tickets: {
+      pacifista_support_ticket: new PacifistaSupportTicketCrudClient(),
+      pacifista_support_ticket_message:
+        new PacifistaSupportTicketMessageCrudClient(),
+    },
   };
 
   public web = {

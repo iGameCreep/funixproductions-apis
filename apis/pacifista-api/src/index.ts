@@ -2,6 +2,8 @@
  * Public Surface of Pacifista API
  */
 
+export * from "./Client";
+
 /**
  * Core packages
  */
