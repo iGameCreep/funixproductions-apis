@@ -1,8 +1,11 @@
 {
   "name": "pacifista-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A JavaScript library to interact with the Pacifista API",
   "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "clean": "rimraf dist",
     "prebuild": "npm run clean",
