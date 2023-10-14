@@ -4,7 +4,7 @@ import { PacifistaSupportTicketMessageDTO } from "../dtos/PacifistaSupportTicket
 import {
   HttpMethods,
   callApi,
-} from "funixproductions-apis-core/dist/components/requests/caller";
+} from "funixproductions-apis-core";
 
 export class PacifistaSupportTicketMessageCrudClient extends PacifistaService<PacifistaSupportTicketMessageDTO> {
   constructor() {
