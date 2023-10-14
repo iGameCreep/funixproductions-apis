@@ -1,10 +1,10 @@
 import { ApiDTO } from "funixproductions-apis-core";
 
 export class FunixbotUserExpDto extends ApiDTO {
-  twitchUserId: string = "";
-  twitchUsername: string = "";
-  xp: number = 0;
-  xpNextLevel: number = 0;
-  level: number = 0;
-  lastMessageDateSeconds: bigint = BigInt(0);
+  twitchUserId?: string;
+  twitchUsername?: string;
+  xp?: number;
+  xpNextLevel?: number;
+  level?: number;
+  lastMessageDateSeconds?: bigint;
 }
