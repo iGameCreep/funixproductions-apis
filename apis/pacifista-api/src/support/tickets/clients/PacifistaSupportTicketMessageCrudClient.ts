@@ -1,17 +1,14 @@
 import { Paginated, PageOption } from "funixproductions-apis-core";
-import { PacifistaService } from "../../../pacifista-service";
+import { API_URL, PacifistaService } from "../../../pacifista-service";
 import { PacifistaSupportTicketMessageDTO } from "../dtos/PacifistaSupportTicketMessageDTO";
-import {
-  HttpMethods,
-  callApi,
-} from "funixproductions-apis-core";
+import { HttpMethods, callApi } from "funixproductions-apis-core";
 
 export class PacifistaSupportTicketMessageCrudClient extends PacifistaService<PacifistaSupportTicketMessageDTO> {
   constructor() {
     super("/support/ticket");
   }
 
-  protected webPath: string = "https://api.pacifista.fr/support/ticket/web";
+  protected webPath: string = API_URL + "/support/ticket/web";
 
   fetchUserTicketsMessages(
     options: PageOption,
