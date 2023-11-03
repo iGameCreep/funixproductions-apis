@@ -1,8 +1,11 @@
 {
   "name": "funixgaming-api",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "A JavaScript library to interact with the FunixGaming API",
   "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "clean": "rimraf dist",
     "prebuild": "npm run clean",
