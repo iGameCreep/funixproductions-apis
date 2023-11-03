@@ -1,6 +1,6 @@
 {
   "name": "funixgaming-api",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "A JavaScript library to interact with the FunixGaming API",
   "main": "dist/index.js",
   "files": [
