@@ -1,7 +1,7 @@
 import { FunixgamingService } from "../../funixgaming-service";
-import { FunixbotAutomessageDto } from "../dtos/funixbot-automessage-dto";
+import { AutomessageDTO } from "../dtos/AutomessageDTO";
 
-export class FunixbotAutomessagesCrudClient extends FunixgamingService<FunixbotAutomessageDto> {
+export class FunixbotAutomessagesCrudClient extends FunixgamingService<AutomessageDTO> {
   constructor() {
     super("/funixbot/automessages");
   }

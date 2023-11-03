@@ -35,7 +35,7 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> {
     const params: PageOption = {
       page: options.page,
       elemsPerPage: options.elemsPerPage || 10,
-      sort: options.sort!,
+      sort: options.sort,
       search: options.search,
     };
 
@@ -52,7 +52,7 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> {
     const params: PageOption = {
       page: options.page,
       elemsPerPage: options.elemsPerPage || 10,
-      sort: options.sort!,
+      sort: options.sort,
       search: options.search,
     };
 

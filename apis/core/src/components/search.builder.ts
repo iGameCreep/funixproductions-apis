@@ -66,7 +66,7 @@ export class SearchBuilder {
    * @param {SearchParam} param - The search parameter to add.
    * @returns {SearchBuilder} The updated SearchBuilder instance.
    */
-  addParam(param: SearchParam): SearchBuilder {
+  addParam(param: SearchParam): this {
     if (param.key.length > 0) {
       if (!param.value || param.value.length <= 0) {
         const indexToRemove = this.queryArray.findIndex(

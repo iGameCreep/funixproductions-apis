@@ -1,4 +1,4 @@
 export class MojangUserNameAndIdDTO {
-    name!: string;
-    id!: string;
+  name!: string;
+  id!: string;
 }

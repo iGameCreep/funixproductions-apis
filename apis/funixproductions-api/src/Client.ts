@@ -6,6 +6,6 @@ export class Client {
    * @param {string} [apiKey] - Optional API key for authentication.
    */
   constructor(apiKey?: string) {
-    setApikey(apiKey || "");
+    setApikey(apiKey ?? "");
   }
 }

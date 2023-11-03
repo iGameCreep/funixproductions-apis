@@ -1,7 +1,7 @@
 import { FunixgamingService } from "../../funixgaming-service";
-import { FunixbotCommandDto } from "../dtos/funixbot-command-dto";
+import { CommandDTO } from "../dtos/CommandDTO";
 
-export class FunixbotCommandsCrudClient extends FunixgamingService<FunixbotCommandDto> {
+export class FunixbotCommandsCrudClient extends FunixgamingService<CommandDTO> {
   constructor() {
     super("/funixbot/command");
   }

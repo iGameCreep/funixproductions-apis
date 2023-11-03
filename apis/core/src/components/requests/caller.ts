@@ -4,7 +4,7 @@ import { ApiDTO } from "../../dtos/api-dto";
 
 const axiosInstance: AxiosInstance = axios.create();
 
-var apiKey: string = "";
+let apiKey: string = "";
 
 export function setApikey(apikey: string) {
   apiKey = apikey;

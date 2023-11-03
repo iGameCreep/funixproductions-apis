@@ -1,6 +1,6 @@
 {
   "name": "pacifista-api",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A JavaScript library to interact with the Pacifista API",
   "main": "dist/index.js",
   "files": [
@@ -27,6 +27,6 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "funixproductions-apis-core": "^1.0.7"
+    "funixproductions-apis-core": "^1.0.8"
   }
 }
